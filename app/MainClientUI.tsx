@@ -98,7 +98,7 @@ export const regionData: Record<
       bupyeong: { name: "부평구", dongs: ["부평동", "산곡동", "청천동", "갈산동", "삼산동", "부개동", "일신동", "십정동"] },
       gyeyang: { name: "계양구", dongs: ["효성동", "계산동", "작전동", "작전서운동", "계양동"] },
       seohae: { name: "서구", dongs: ["검암경서동", "연희동", "청라1동", "청라2동", "청라3동", "가정동", "신현원창동", "석남동", "가좌동"] },
-      geomdan: { name: "검단구", dongs: ["검단동", "불로대곡동", "원당동", "당하동", "오류왕길동", "마전동", "아라동", "금곡동"] },
+      geomdan: { name: "검단동", dongs: ["검단동", "불로대곡동", "원당동", "당하동", "오류왕길동", "마전동", "아라동", "금곡동"] },
       ganghwa: { name: "강화군", dongs: ["강화읍", "선원면", "불은면", "길상면", "화도면", "양도면", "내가면", "하점면", "양사면", "송해면", "교동면", "삼산면", "서도면"] },
       ongjin: { name: "옹진군", dongs: ["북도면", "연평면", "백령면", "대청면", "덕적면", "자월면", "영흥면"] },
     },
@@ -182,7 +182,6 @@ export default function MainClientUI({ children }: { children?: React.ReactNode 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // 마운트 직후 브라우저에서만 안전하게 셔플 실행 (Hydration 에러 418 원천 차단)
     setMounted(true);
     const shuffled = [...initialShops];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -219,7 +218,6 @@ export default function MainClientUI({ children }: { children?: React.ReactNode 
       ? currentDistricts[selectedDistrict].dongs
       : [];
 
-  // SSR 시점에는 항상 정적 initialShops를 렌더링하도록 일치 보장
   const displayShops = mounted ? shops : initialShops;
 
   return (

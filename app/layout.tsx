@@ -14,22 +14,19 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: '온쉼테라피 | 서울·경기·인천 출장 웰니스 마사지 예약 플랫폼',
+    default: '온쉼테라피 | 수도권 프리미엄 출장 웰니스 테라피',
     template: '%s | 온쉼테라피',
   },
   description:
-    '도심 속 편안한 휴식을 선사하는 온쉼테라피입니다. 서울, 경기, 인천 전 지역 출장 마사지, 스웨디시, 아로마 힐링 케어 및 투명한 정찰제 제휴 안내를 확인하세요.',
+    '도심 속 편안한 휴식을 선사하는 온쉼테라피입니다. 서울, 경기, 인천 전 지역 프리미엄 홈케어 출장 마사지 및 맞춤형 웰니스 테라피 서비스를 제공합니다.',
   keywords: [
     '온쉼테라피',
     '출장마사지',
-    '서울출장마사지',
-    '경기출장마사지',
-    '인천출장마사지',
-    '출장 웰니스 마사지',
-    '출장 아로마마사지',
-    '출장 안심 마사지',
-    '스웨디시',
-    '마사지예약',
+    '출장웰니스',
+    '스웨디시테라피',
+    '아로마마사지',
+    '홈케어마사지',
+    '수도권출장마사지',
   ],
   authors: [{ name: '온쉼테라피', url: SITE_URL }],
   creator: '온쉼테라피',
@@ -44,15 +41,15 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: SITE_URL,
     siteName: '온쉼테라피',
-    title: '온쉼테라피 | 서울·경기·인천 출장 웰니스 마사지 예약 플랫폼',
+    title: '온쉼테라피 | 수도권 프리미엄 출장 웰니스 테라피',
     description:
-      '도심 속 편안한 휴식을 선사하는 온쉼테라피입니다. 출장 마사지, 스웨디시, 아로마 힐링 케어 정보 및 최적의 정찰제 코스를 한눈에 확인하세요.',
+      '도심 속 편안한 휴식을 선사하는 온쉼테라피입니다. 전문 테라피스트의 프라이빗한 1:1 맞춤형 홈케어 서비스를 만나보세요.',
     images: [
       {
-        url: '/og-image.png', // public/og-image.png (권장 1200x630)
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: '온쉼테라피 - 수도권 프리미엄 출장 웰니스 마사지',
+        alt: '온쉼테라피 - 프리미엄 출장 웰니스 마사지',
       },
     ],
   },
@@ -68,7 +65,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // 네이버 서치어드바이저 신규 등록 시 발급받은 사이트 소유확인 키
   verification: {
     other: {
       'naver-site-verification': '88faad0958579b65c5703320ee4590ccb4dafa39',
@@ -79,7 +75,7 @@ export const metadata: Metadata = {
   },
 };
 
-// 🌟 네이버 및 구글 검색엔진 최적화 글로벌 JSON-LD (WebSite + HealthAndBeautyBusiness 복합 스키마)
+// JSON-LD 구조화 데이터 (검색엔진 표준 스키마)
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -88,16 +84,11 @@ const jsonLd = {
       '@id': `${SITE_URL}/#website`,
       url: SITE_URL,
       name: '온쉼테라피',
-      description: '서울, 경기, 인천 전 지역 출장 웰니스 마사지 & 프리미엄 테라피 안내 플랫폼',
+      description: '수도권 전 지역 출장 웰니스 마사지 및 프리미엄 테라피 안내 플랫폼',
       publisher: {
         '@id': `${SITE_URL}/#organization`,
       },
       inLanguage: 'ko-KR',
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${SITE_URL}/?q={search_term_string}`,
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
       '@type': ['HealthAndBeautyBusiness', 'Organization'],
@@ -111,7 +102,7 @@ const jsonLd = {
         height: '512',
       },
       image: `${SITE_URL}/banner.jpg`,
-      description: '수도권 전역 1:1 맞춤 출장 타이, 아로마, 감성 스웨디시 정찰제 힐링 케어 안내',
+      description: '수도권 전역 1:1 맞춤 출장 스웨디시, 아로마, 웰니스 힐링 케어 안내',
       telephone: '0507-1280-3344',
       priceRange: '60,000원~180,000원',
       currenciesAccepted: 'KRW',
@@ -155,6 +146,11 @@ export default function RootLayout({
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className="bg-[#070709] text-gray-100 antialiased" suppressHydrationWarning>
+        {/* JSON-LD 삽입 (필요시 컴포넌트 내에서 Script 태그로 렌더링하여 사용) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>
